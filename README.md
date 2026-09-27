@@ -179,3 +179,6 @@ mainly the commit that adds concurrent request handling and graceful shutdown to
 | Port from an environment variable | Kept from the base framework (`PORT`) |
 | Runs in a Docker container | Done. `Dockerfile` added, builds and runs locally and in Docker Hub |
 | Deploys on AWS EC2 | Done. Running next to `virtualization-lab` on the same instance, port 8082 |
+
+
+Note: The video is in docs archive

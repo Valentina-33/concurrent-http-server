@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Maintainable Application Server</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+    <header class="hero">
+        <img src="/images/logo.png" alt="Application server logo" class="logo">
+        <div>
+            <h1>Maintainable Application Server</h1>
+            <p>Static files served by the framework, plus two lambda-based GET routes.</p>
+        </div>
+    </header>
+
+    <main>
+        <section class="card">
+            <h2>/hello</h2>
+            <form id="hello-form">
+                <label for="hello-name">Your name</label>
+                <input type="text" id="hello-name" name="name" placeholder="Ada">
+                <button type="submit">Greet me</button>
+            </form>
+        </section>
+
+        <section class="card">
+            <h2>/pi</h2>
+            <button type="button" id="pi-button">Get Math.PI</button>
+        </section>
+
+        <section class="status" aria-live="polite">
+            <pre id="result" hidden></pre>
+        </section>
+
+        <section class="card">
+            <h2>Static resources</h2>
+            <p>These images are served as bytes by the same Java server:</p>
+            <div class="gallery">
+                <img src="/images/logo.png" alt="Sample PNG served by the server">
+                <img src="/images/banner.jpg" alt="Sample JPEG served by the server">
+            </div>
+        </section>
+    </main>
+
+    <script src="/app.js"></script>
+</body>
+</html>

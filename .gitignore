@@ -1,0 +1,46 @@
+# Maven build output
+target/
+
+# Compiled class files
+*.class
+
+# IDE metadata
+.idea/
+*.iml
+*.iws
+*.ipr
+.vscode/
+.settings/
+.project
+.classpath
+.factorypath
+bin/
+out/
+
+# OS metadata
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Logs
+*.log
+logs/
+
+# Temporary files
+*.tmp
+*.swp
+*~
+
+# Environment / secrets — never commit these
+.env
+.env.*
+*.pem
+*.ppk
+*.key
+credentials
+credentials.json
+aws-exports.js
+*.pfx
+
+# Local AWS / cloud configuration
+.aws/

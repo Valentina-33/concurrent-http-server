@@ -23,16 +23,16 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- * Accepts client connections and hands each one to a worker thread from a
- * bounded pool, so multiple clients are served in parallel instead of one at
- * a time. The accept loop itself stays single-threaded: its only job is to
- * accept a socket and submit it, never to run application code, so it is
- * never the bottleneck.
+ * Accepts client connections and gives each one to a worker thread from a
+ * pool, so several clients can be served at the same time instead of one
+ * after another. The accept loop only accepts a socket and submits it to the
+ * pool, it never runs the application code itself, so it never becomes the
+ * bottleneck.
  *
  * <p>Shutdown is graceful: {@link #stop()} stops new connections from being
- * accepted, but every request already handed to the pool is allowed to run
- * to completion (up to {@link #SHUTDOWN_TIMEOUT_SECONDS}) before the process
- * exits, so a client mid-request never has its connection cut.</p>
+ * accepted, but any request already given to the pool gets to finish (up to
+ * {@link #SHUTDOWN_TIMEOUT_SECONDS}) before the process exits. A client in
+ * the middle of a request never gets cut off.</p>
  */
 public final class HttpServer {
 
@@ -66,7 +66,7 @@ public final class HttpServer {
                     if (running) {
                         LOGGER.log(Level.WARNING, "Accept loop error", e);
                     }
-                    // else: stop() closed the socket on purpose to unblock accept() -- expected.
+                    // if running is false, stop() closed the socket on purpose, this is expected
                 }
             }
         } finally {
@@ -79,7 +79,7 @@ public final class HttpServer {
     /**
      * Stops accepting new connections and closes the listening socket, which
      * unblocks the accept loop. Requests already submitted to the worker pool
-     * keep running; {@link #awaitInFlightRequests()} waits for them.
+     * keep running, and {@link #awaitInFlightRequests()} waits for them.
      */
     public void stop() {
         running = false;
@@ -94,7 +94,7 @@ public final class HttpServer {
     }
 
     private void awaitInFlightRequests() {
-        workerPool.shutdown(); // stop accepting new tasks; lets submitted ones finish
+        workerPool.shutdown(); // stops accepting new tasks, but lets submitted ones finish
         try {
             if (!workerPool.awaitTermination(SHUTDOWN_TIMEOUT_SECONDS, TimeUnit.SECONDS)) {
                 LOGGER.warning("Worker pool did not finish within " + SHUTDOWN_TIMEOUT_SECONDS

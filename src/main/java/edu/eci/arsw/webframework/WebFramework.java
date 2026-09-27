@@ -40,9 +40,9 @@ public class WebFramework {
     }
 
     /**
-     * Size of the fixed worker-thread pool that handles connections
-     * concurrently. Configurable so the deployment environment (a small EC2
-     * instance vs. a developer laptop) can size it without a rebuild.
+     * Size of the worker thread pool that handles connections at the same
+     * time. It can be set from outside, so a small EC2 instance and a
+     * developer laptop can each use a different size without rebuilding.
      */
     private static int resolvePoolSize() {
         String poolSizeValue = System.getenv("THREAD_POOL_SIZE");

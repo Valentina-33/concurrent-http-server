@@ -161,7 +161,7 @@ curl "http://localhost:8082/hello?name=AWS"
 
 ![Both containers running together on the instance](docs/ec2-deployment.png)
 
-**Public deployment URL:** `http://ec2-3-235-55-104.compute-1.amazonaws.com:8082/hello?name=AWS`
+**Public deployment URL:** `http://ec2-44-201-56-51.compute-1.amazonaws.com:8082/hello?name=AWS`
 
 ![Public URL answering from a browser](docs/ec2-endpoint.png)
 
